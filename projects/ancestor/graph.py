@@ -168,19 +168,6 @@ class Graph:
                     #### enqueue the neighbor's path
                     q.enqueue(neighbor_path)
 
-    def dfs(self, starting_vertex, destination_vertex):
-        """
-        Return a list containing a path from
-        starting_vertex to destination_vertex in
-        depth-first order.
-        """
-        pass  # TODO
-
-    # in dfs_recursive, when we hit our base case, we need to return it
-    # all the way up
-
-    # When do we want to return from dfs?
-    ## When we hit the destination vertex!
     def dfs_recursive(self, current_vertex, destination_vertex, visited=None, path=[]):
         """
         Return a list containing a path from
