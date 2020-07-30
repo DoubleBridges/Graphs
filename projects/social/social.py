@@ -98,17 +98,26 @@ class SocialGraph:
                 path = []
 
             if user not in visited:
-                print(visited)
                 path.append(user)
                 visited[user] = path
+                # print(path, visited)
 
                 freinds = self.friendships[user]
 
-                if len(freinds) > 0:
-                    print(freinds)
-                    for freind in freinds:
-                        path_copy = path.copy()
-                        find_all_freinds(freind, path_copy)
+                for freind in freinds:
+                    path_copy = path.copy()
+                    # visited[freind] = path_copy.append(freind)
+                    find_all_freinds(freind, path_copy)
+
+                # for friend_ in freinds:
+
+                # if len(freinds) > 0:
+                #     for freind in freinds:
+                #         path_copy = path.copy()
+                #         visited[user] = path_copy.append(user)
+                #     for freind in freinds:
+                #         another_copy = path.copy()
+                #         find_all_freinds(freind, another_copy)
 
         find_all_freinds(user_id)
 
