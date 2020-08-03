@@ -1,6 +1,23 @@
 import random
 
 
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, value):
+        self.queue.append(value)
+
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+
+    def size(self):
+        return len(self.queue)
+
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -91,35 +108,47 @@ class SocialGraph:
 
         The key is the friend's ID and the value is the path.
         """
-        visited = {}  # Note that this is a dictionary, not a set
+        # visited = {}  # Note that this is a dictionary, not a set
 
-        def find_all_freinds(user, path=None):
-            if path == None:
-                path = []
+        # def find_all_friends(user, path=None):
+        #     if path == None:
+        #         path = []
 
-            if user not in visited:
-                path.append(user)
-                visited[user] = path
-                # print(path, visited)
+        #     if user not in visited:
+        #         path.append(user)
+        #         visited[user] = path
 
-                freinds = self.friendships[user]
+        #         friends = self.friendships[user]
 
-                for freind in freinds:
-                    path_copy = path.copy()
-                    # visited[freind] = path_copy.append(freind)
-                    find_all_freinds(freind, path_copy)
+        #         for freind in friends:
+        #             path_copy = path.copy()
 
-                # for friend_ in freinds:
+        #             find_all_friends(freind, path_copy)
 
-                # if len(freinds) > 0:
-                #     for freind in freinds:
-                #         path_copy = path.copy()
-                #         visited[user] = path_copy.append(user)
-                #     for freind in freinds:
-                #         another_copy = path.copy()
-                #         find_all_freinds(freind, another_copy)
+        # find_all_friends(user_id)
 
-        find_all_freinds(user_id)
+        # return visited
+
+        q = Queue()
+        visited = {}
+
+        q.enqueue([user_id])
+
+        while q.size() > 0:
+
+            current_path = q.dequeue()
+            current_node = current_path[-1]
+
+            if current_node not in visited:
+                visited[current_node] = current_path
+
+                friends = self.friendships[current_node]
+
+                for friend in friends:
+                    friend_path = current_path.copy()
+                    friend_path.append(friend)
+
+                    q.enqueue(friend_path)
 
         return visited
 
